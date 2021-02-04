@@ -105,8 +105,6 @@ Suggestions/improvements are
 
 ## Author
 
-| [![twitter/hoeffjo](http://gravatar.com/avatar/1318668b99b2d5a3900f3f7758763a69?s=70)](http://twitter.com/hoeffjo "Follow @hoeffjo on Twitter") |
-|---|
 | [Jonas Hoefflin](http://twitter.com/hoeffjo/) |
 
 ## Thanks to…
