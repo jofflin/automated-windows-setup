@@ -1,6 +1,6 @@
 param ($type = "all")
 
-$file = Get-Content "../program-list.txt"
+$file = Get-Content "./program-list.txt"
 
 # Get the list of apps corresponding to the type mentioned in the txt-file
 function Get-List {

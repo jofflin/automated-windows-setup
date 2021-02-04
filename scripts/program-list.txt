@@ -1,0 +1,64 @@
+Important! you need at least the all!
+Create Ranges with the following snytax (Apps::[yourName]):
+call the script without the prefix (Apps::)
+
+Apps::sample
+app1
+app2
+...
+Apps::sample
+
+
+
+
+
+Apps::all
+
+Apps::default
+  googlechrome
+  googlechrome.canary
+  firefox
+  opera
+  7zip
+  icloud
+  itunes
+  spotify
+  vlc
+  teamviewer
+  f.lux
+  thunderbird
+  lastpass
+Apps::default
+
+Apps::gaming
+  discord
+  epicgameslauncher
+  teamspeak
+  steam
+  skype
+Apps::gaming
+
+Apps::dev
+  python
+  nodejs-lts
+  figma
+  etcher
+  filezilla
+  gimp
+  git
+  jre8
+  vscode
+  webstorm
+  notepadplusplus
+  yarn
+  putty.install
+  tortoisegit
+  gitkraken
+  insomnia-rest-api-client
+  dotnetcore-sdk
+  dotnetcore-windowshosting
+  azure-cli
+  postman
+Apps::dev
+
+Apps::all
