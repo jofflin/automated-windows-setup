@@ -1,5 +1,5 @@
 # Check to see if we are currently running "as Administrator"
-if (!(Verify-Elevated)) {
+if (!(New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))) {
     $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
     $newProcess.Arguments = $myInvocation.MyCommand.Definition;
     $newProcess.Verb = "runas";
