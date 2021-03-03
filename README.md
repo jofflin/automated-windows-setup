@@ -1,6 +1,6 @@
 ﻿# Windows setup with dotfiles and choco
 
-A collection of PowerShell files for Windows, including common application installation through `Chocolatey` and `npm`, and developer-minded Windows configuration defaults. 
+A collection of PowerShell files for Windows, including common application installation through `Chocolatey` and `npm`, and developer-minded Windows configuration defaults.
 
 ## Installation
 
@@ -9,6 +9,7 @@ A collection of PowerShell files for Windows, including common application insta
 You can clone the repository wherever you want. (I like to keep it in `~\Projects\dotfiles-windows`.) The bootstrapper script will copy the files to your PowerShell Profile folder.
 
 From PowerShell:
+
 ```posh
 git clone https://github.com/hoeffjo/setup-dotfiles-choco.git; cd setup-dotfiles-choco; . .\bootstrap.ps1
 ```
@@ -72,7 +73,23 @@ When setting up a new Windows box, you may want to install some common packages,
 .\deps.ps1
 ```
 
-> The scripts will install Chocolatey, node.js, and WebPI if necessary.
+> The scripts will install Chocolatey, node.js, and other tools. Check the "Choco Install ..." lines and disable or add what you (don't) need.
+
+### Install WSL2 (Needs Build 2004+)
+
+To quickly get up and running with WSL2, open a new PowerShell window as "Admin" and run the following one-liner:
+
+```post
+.\installwsl2.ps1
+```
+
+You need to run this script twice, one to install pre-requisites and once after the reboot to update the WSl2 kernel and install the distro (Ubuntu 18.04 recommended from MS)
+The if it works with
+
+```post
+(Get-VM).Name # Get a list of VM names
+Set-VMProcessor -VMName [TestVMName] -ExposeVirtualizationExtensions $true
+```
 
 ## Forking your own version
 
@@ -81,6 +98,7 @@ This repository is built around how I use Windows, which is predominantly in a V
 If you do fork for your own custom configuration, you will need to touch a few files to reference your own repository, instead of mine.
 
 Within `/setup/install.ps1`, modify the Repository variables.
+
 ```posh
 $account = "hoeffjo"
 $repo    = "setup-dotfiles-choco"
@@ -89,11 +107,13 @@ $branch  = "master"
 
 Within the Windows Defaults file, `/windows.ps1`, modify the Machine
 name on the first line.
+
 ```posh
 (Get-WmiObject Win32_ComputerSystem).Rename("MyMachineName") | Out-Null
 ```
 
 Finally, be sure to reference your own repository in the git-free installation command.
+
 ```bash
 iex ((new-object net.webclient).DownloadString('https://raw.github.com/$account/$repo/$branch/setup/install.ps1'))
 ```
@@ -109,5 +129,5 @@ Suggestions/improvements are
 
 ## Thanks to…
 
-* @[Mathias Bynens](http://mathiasbynens.be/) for his [OS X dotfiles](http://mths.be/dotfiles), which this repository is modeled after.
-* @[Jay Harris](http://twitter.com/jayharris/) for his [dotfiles-repo](https://github.com/jayharris/dotfiles-windows), which this repository is modeled after.
+- @[Mathias Bynens](http://mathiasbynens.be/) for his [OS X dotfiles](http://mths.be/dotfiles), which this repository is modeled after.
+- @[Jay Harris](http://twitter.com/jayharris/) for his [dotfiles-repo](https://github.com/jayharris/dotfiles-windows), which this repository is modeled after.

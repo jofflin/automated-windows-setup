@@ -38,28 +38,25 @@ if ((which cinst) -eq $null) {
 
 # system and cli
 choco install curl                          --limit-output
-choco install nuget.commandline             --limit-output
-choco install webpi                         --limit-output
 choco install git.install                   --limit-output -params '"/GitAndUnixToolsOnPath /NoShellIntegration"'
 choco install nodejs-lts                    --limit-output
 choco install yarn                          --limit-output
 choco install notepadplusplus               --limit-output
 choco install putty.install                 --limit-output
 choco install jre8                          --limit-output
-choco install dotnetcore-sdk                --limit-output
-choco install dotnetcore-windowshosting     --limit-output
 choco install python                        --limit-output
 choco install tortoisegit                   --limit-output
 choco install gitkraken                     --limit-output
+choco install microsoft-windows-terminal    --limit-output
 
 #fonts
 choco install sourcecodepro                 --limit-output
 
 # browsers
-choco install GoogleChrome                  --limit-output; <# pin; evergreen #> choco pin add --name GoogleChrome        --limit-output
-choco install GoogleChrome.Canary           --limit-output; <# pin; evergreen #> choco pin add --name GoogleChrome.Canary --limit-output
-choco install Firefox                       --limit-output; <# pin; evergreen #> choco pin add --name Firefox             --limit-output
-choco install Opera                         --limit-output; <# pin; evergreen #> choco pin add --name Opera               --limit-output
+choco install GoogleChrome                  --limit-output;
+choco install GoogleChrome.Canary           --limit-output;
+choco install Firefox                       --limit-output;
+choco install Opera                         --limit-output;
 
 # dev tools and frameworks
 choco install Fiddler                       --limit-output
@@ -137,6 +134,8 @@ if (which npm) {
     npm install -g node-inspector
     npm install -g yo
     npm install -g @angular/cli
+    npm install -g @vue/cli
+    npm install -g typescript
 }
 
 ### Janus for vim
