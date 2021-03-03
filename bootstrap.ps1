@@ -1,6 +1,10 @@
 $profileDir = Split-Path -parent $profile
 $componentDir = Join-Path $profileDir "components"
 
+Write-Output $profileDir
+Write-Output $componentDir
+Write-Output $profile
+
 New-Item $profileDir -ItemType Directory -Force -ErrorAction SilentlyContinue
 New-Item $componentDir -ItemType Directory -Force -ErrorAction SilentlyContinue
 
