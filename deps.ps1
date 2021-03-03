@@ -1,5 +1,5 @@
 # Check to see if we are currently running "as Administrator"
-if (!(New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))) {
+if (!(Verify-Elevated)) {
     $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
     $newProcess.Arguments = $myInvocation.MyCommand.Definition;
     $newProcess.Verb = "runas";
@@ -37,36 +37,63 @@ if ((which cinst) -eq $null) {
 }
 
 # system and cli
-choco install curl                --limit-output
-choco install nuget.commandline   --limit-output
-choco install webpi               --limit-output
-choco install git.install         --limit-output -params '"/GitAndUnixToolsOnPath /NoShellIntegration"'
-choco install nvm.portable        --limit-output
+choco install curl                          --limit-output
+choco install nuget.commandline             --limit-output
+choco install webpi                         --limit-output
+choco install git.install                   --limit-output -params '"/GitAndUnixToolsOnPath /NoShellIntegration"'
+choco install nodejs-lts                    --limit-output
+choco install yarn                          --limit-output
+choco install notepadplusplus               --limit-output
+choco install putty.install                 --limit-output
+choco install jre8                          --limit-output
+choco install dotnetcore-sdk                --limit-output
+choco install dotnetcore-windowshosting     --limit-output
+choco install python                        --limit-output
+choco install tortoisegit                   --limit-output
+choco install gitkraken                     --limit-output
 
 #fonts
-choco install sourcecodepro       --limit-output
+choco install sourcecodepro                 --limit-output
 
 # browsers
-# choco install GoogleChrome        --limit-output; <# pin; evergreen #> choco pin add --name GoogleChrome        --limit-output
-# choco install GoogleChrome.Canary --limit-output; <# pin; evergreen #> choco pin add --name GoogleChrome.Canary --limit-output
-# choco install Firefox             --limit-output; <# pin; evergreen #> choco pin add --name Firefox             --limit-output
-# choco install Opera               --limit-output; <# pin; evergreen #> choco pin add --name Opera               --limit-output
+choco install GoogleChrome                  --limit-output; <# pin; evergreen #> choco pin add --name GoogleChrome        --limit-output
+choco install GoogleChrome.Canary           --limit-output; <# pin; evergreen #> choco pin add --name GoogleChrome.Canary --limit-output
+choco install Firefox                       --limit-output; <# pin; evergreen #> choco pin add --name Firefox             --limit-output
+choco install Opera                         --limit-output; <# pin; evergreen #> choco pin add --name Opera               --limit-output
 
 # dev tools and frameworks
-# choco install atom                --limit-output; <# pin; evergreen #> choco pin add --name Atom                --limit-output
-# choco install Fiddler             --limit-output
-choco install vim                 --limit-output
-# choco install winmerge            --limit-output
+choco install Fiddler                       --limit-output
+choco install vim                           --limit-output
+choco install vscode                        --limit-output
+choco install webstorm                      --limit-output
+choco install insomnia-rest-api-client      --limit-output
+choco install figma                         --limit-output
+choco install filezilla                     --limit-output
+choco install azure-cli                     --limit-output
+choco install postman                       --limit-output
+
+# gaming
+choco install discord                       --limit-output
+choco install teamspeak                     --limit-output
+choco install epicgameslauncher             --limit-output
+choco install steam                         --limit-output
+
+# casual
+choco install 7zip                          --limit-output
+choco install icloud                        --limit-output
+choco install itunes                        --limit-output
+choco install spotify                       --limit-output
+choco install vlc                           --limit-output
+choco install teamviewer                    --limit-output
+choco install thunderbird                   --limit-output
+choco install lastpass                      --limit-output
+
+
+
+
 
 Refresh-Environment
 
-nvm on
-$nodeLtsVersion = choco search nodejs-lts --limit-output | ConvertFrom-String -TemplateContent "{Name:package-name}\|{Version:1.11.1}" | Select -ExpandProperty "Version"
-nvm install $nodeLtsVersion
-nvm use $nodeLtsVersion
-Remove-Variable nodeLtsVersion
-
-gem pristine --all --env-shebang
 
 ### Windows Features
 Write-Host "Installing Windows Features..." -ForegroundColor "Yellow"
@@ -84,8 +111,7 @@ Enable-WindowsOptionalFeature -Online -All -FeatureName `
     "IIS-ManagementConsole", `
     "IIS-RequestFiltering", `
     "IIS-StaticContent", `
-    "IIS-WebSockets", `
-    "IIS-WindowsAuthentication" `
+    "IIS-WebSockets" `
     -NoRestart | Out-Null
 
 # ASP.NET Base Configuration
@@ -110,6 +136,7 @@ if (which npm) {
     npm install -g mocha
     npm install -g node-inspector
     npm install -g yo
+    npm install -g @angular/cli
 }
 
 ### Janus for vim

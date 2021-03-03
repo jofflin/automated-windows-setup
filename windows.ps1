@@ -1,5 +1,5 @@
 # Check to see if we are currently running "as Administrator"
-if (!(New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))) {
+if (!(Verify-Elevated)) {
     $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
     $newProcess.Arguments = $myInvocation.MyCommand.Definition;
     $newProcess.Verb = "runas";
@@ -508,10 +508,10 @@ Set-ItemProperty "HKLM:\SOFTWARE\WOW6432Node\Policies\Microsoft\Windows\Delivery
 Write-Host "Configuring Windows Defender..." -ForegroundColor "Yellow"
 
 # Disable Cloud-Based Protection: Enabled Advanced: 2, Enabled Basic: 1, Disabled: 0
-Set-MpPreference -MAPSReporting Disabled
+ConfigDefender\Set-MpPreference -MAPSReporting Disabled
 
 # Disable automatic sample submission: Prompt: 0, Auto Send Safe: 1, Never: 2, Auto Send All: 3
-Set-MpPreference -SubmitSamplesConsent NeverSend
+ConfigDefender\Set-MpPreference -SubmitSamplesConsent NeverSend
 
 ###############################################################################
 ### Internet Explorer                                                         #
