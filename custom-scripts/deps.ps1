@@ -36,11 +36,12 @@ if ((which cinst) -eq $null) {
     choco feature enable -n=allowGlobalConfirmation
 }
 
+choco install git.install -params '/GitAndUnixToolsOnPath /NoShellIntegration'
+
 $programs = @(
     # system and cli
     "curl"       
-    # "webpi"                   
-    "git.install -params '/GitAndUnixToolsOnPath /NoShellIntegration'"
+    # "webpi"
     "nodejs-lts"                    
     "yarn"                          
     "notepadplusplus"               
@@ -91,7 +92,7 @@ $programs = @(
 
 foreach ($program in $programs) {
     Write-Output "Trying to install $program"
-    choco install $program --limit-output
+    choco install $program -y
 }
 
 Refresh-Environment
