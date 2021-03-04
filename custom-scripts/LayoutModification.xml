@@ -1,7 +1,8 @@
 <LayoutModificationTemplate 
   xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" 
   xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1"
-  xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">
+  xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification"
+  xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout">
   <LayoutOptions StartTileGroupCellWidth="6" />
   <DefaultLayoutOverride>
     <StartLayoutCollection>

@@ -60,7 +60,7 @@ Push-Location $dotfilesInstallDir
 & .\bootstrap.ps1
 Pop-Location
 
-# $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
-# $newProcess.Arguments = "-nologo";
-# [System.Diagnostics.Process]::Start($newProcess);
+$newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
+$newProcess.Arguments = "-nologo";
+[System.Diagnostics.Process]::Start($newProcess);
 

@@ -1,7 +1,7 @@
-$destination = $home + "\AppData\Local\Microsoft\Windows\Shell\a"#
-$source = $PSScriptRoot + "\LayoutModification2.xml"
+$destination = $home + "\AppData\Local\Microsoft\Windows\Shell"#
+$source = $PSScriptRoot + "\LayoutModification.xml"
 
-# Copy-Item $source -Destination $destination
+Copy-Item $source -Destination $destination
 
 $path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache"
 
