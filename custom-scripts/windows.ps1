@@ -235,8 +235,6 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explo
 # Sync Settings: Disable automatically syncing settings with other Windows 10 devices
 # Theme
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization" "Enabled" 0
-# Internet Explorer (Removed in 1903)
-#Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings" "Enabled" 0
 # Passwords
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials" "Enabled" 0
 # Language

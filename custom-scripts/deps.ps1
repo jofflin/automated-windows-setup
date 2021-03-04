@@ -38,7 +38,8 @@ if ((which cinst) -eq $null) {
 
 $programs = @(
     # system and cli
-    "curl"                          
+    "curl"       
+    # "webpi"                   
     "git.install -params '/GitAndUnixToolsOnPath /NoShellIntegration'"
     "nodejs-lts"                    
     "yarn"                          
@@ -56,7 +57,7 @@ $programs = @(
   
     # browsers
     "GoogleChrome"                  
-    "GoogleChrome.Canary"           
+    "googlechrome.canary"           
     "Firefox"                       
     "Opera"                         
   
@@ -84,12 +85,13 @@ $programs = @(
     "vlc"                           
     "teamviewer"                    
     "thunderbird"                   
-    "lastpass"                      
+    "lastpass"
+    "office-tool"                  
 )
 
 foreach ($program in $programs) {
-    Write-Output "Trying to install $app"
-    choco install $app --limit-output
+    Write-Output "Trying to install $program"
+    choco install $program --limit-output
 }
 
 Refresh-Environment
@@ -126,7 +128,7 @@ Enable-WindowsOptionalFeature -Online -All -FeatureName `
     -NoRestart | Out-Null
 
 # Web Platform Installer for remaining Windows features
-webpicmd /Install /AcceptEula /Products:"UrlRewrite2"
+# webpicmd /Install /AcceptEula /Products:"UrlRewrite2"
 
 ### Node Packages
 Write-Host "Installing Node Packages..." -ForegroundColor "Yellow"
