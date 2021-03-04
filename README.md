@@ -76,10 +76,10 @@ You can clone the repository wherever you want. (I like to keep it in `~\Project
 From PowerShell:
 
 ```posh
-git clone https://github.com/hoeffjo/setup-dotfiles-choco.git; cd setup-dotfiles-choco; . .\bootstrap.ps1
+git clone https://github.com/hoeffjo/automated-windows-setup.git; cd automated-windows-setup; . .\bootstrap.ps1
 ```
 
-To update your settings, `cd` into your local `setup-dotfiles-choco` repository within PowerShell and then:
+To update your settings, `cd` into your local `automated-windows-setup` repository within PowerShell and then:
 
 ```posh
 . .\bootstrap.ps1
@@ -94,7 +94,7 @@ Note: You must have your execution policy set to unrestricted (or at least in by
 To install these dotfiles from PowerShell without Git:
 
 ```bash
-iex ((new-object net.webclient).DownloadString('https://raw.github.com/hoeffjo/setup-dotfiles-choco/master/setup/install.ps1'))
+iex ((new-object net.webclient).DownloadString('https://raw.github.com/hoeffjo/automated-windows-setup/master/setup/install.ps1'))
 ```
 
 To update later on, just run that command again.
@@ -182,7 +182,7 @@ Put the xml file into the same directory as the script and run it.
 
 ## Forking your own version
 
-This repository is built around how I use Windows and to make my setup easier and the same on all my different devices. If you want to use this on your primary OS, you may want a different configuration that reflects that, and I recommend you [fork this repository](https://github.com/hoeffjo/setup-dotfiles-choco/fork).
+This repository is built around how I use Windows and to make my setup easier and the same on all my different devices. If you want to use this on your primary OS, you may want a different configuration that reflects that, and I recommend you [fork this repository](https://github.com/hoeffjo/automated-windows-setup/fork).
 
 If you do fork for your own custom configuration, you will need to touch a few files to reference your own repository, instead of mine.
 
@@ -190,7 +190,7 @@ Within `/setup/install.ps1`, modify the Repository variables.
 
 ```posh
 $account = "hoeffjo"
-$repo = "setup-dotfiles-choco"
+$repo = "automated-windows-setup"
 $branch = "master"
 ```
 
@@ -209,7 +209,7 @@ iex ((new-object net.webclient).DownloadString('https://raw.github.com/$account/
 
 ## Feedback
 
-Suggestions/improvements are [welcome and encouraged](https://github.com/hoeffjo/setup-dotfiles-choco/issues)!
+Suggestions/improvements are [welcome and encouraged](https://github.com/hoeffjo/automated-windows-setup/issues)!
 
 ## Author
 

@@ -1,5 +1,5 @@
 $account = "hoeffjo"
-$repo = "setup-dotfiles-choco"
+$repo = "automated-windows-setup"
 $branch = "master"
 
 $dotfilesTempDir = Join-Path $env:TEMP "dotfiles"
