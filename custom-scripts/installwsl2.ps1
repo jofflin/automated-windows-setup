@@ -246,7 +246,7 @@ function Install-Distro ($distro) {
 
 if ($rebootRequired) {
   shutdown /t 120 /r /c "Reboot required to finish installing WSL2"
-  $cancelReboot = Read-Host 'Cancel reboot for now (you still need to reboot and rerun to finish installing WSL2) [y/N]'
+  $cancelReboot = Read-Host 'Cancel reboot for now (you still need to reboot and rerun to finish installing WSL2; For "N" it will Reboot in 120s) [y/N]'
   if ($cancelReboot.Length -ne 0) {
     if ($cancelReboot.Substring(0, 1).ToLower() -eq 'y') {
       shutdown /a
