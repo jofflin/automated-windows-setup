@@ -1,5 +1,5 @@
 $account = "hoeffjo"
-$repo = "automated-windows-setup"
+$repo = "automated-windows-setupgit "
 $branch = "master"
 
 $dotfilesTempDir = Join-Path $env:TEMP "dotfiles"
@@ -16,7 +16,6 @@ function Download-File {
     Write-Host "Downloading $url to $file"
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     Invoke-WebRequest -Uri $url -OutFile $file
-
 }
 
 function Unzip-File {
