@@ -1,16 +1,15 @@
 $profileDir = Split-Path -parent $profile
-$componentDir = Join-Path $profileDir "components"
-
-Write-Output $profileDir
-Write-Output $componentDir
-Write-Output $profile
+$helperDir = Join-Path $profileDir "profile-script-help"
+$scriptDir = Join-Path $profileDir "custom-scripts"
 
 New-Item $profileDir -ItemType Directory -Force -ErrorAction SilentlyContinue
-New-Item $componentDir -ItemType Directory -Force -ErrorAction SilentlyContinue
+New-Item $helperDir -ItemType Directory -Force -ErrorAction SilentlyContinue
+New-Item $scriptDir -ItemType Directory -Force -ErrorAction SilentlyContinue
 
 Copy-Item -Path ./*.ps1 -Destination $profileDir -Exclude "bootstrap.ps1"
-Copy-Item -Path ./components/** -Destination $componentDir -Include **
-Copy-Item -Path ./home/** -Destination $home -Include **
+Copy-Item -Path ./profile-script-help/** -Destination $helperDir -Recurse  -Include **
+Copy-Item -Path ./custom-scripts/** -Destination $scriptDir -Include **
 
-Remove-Variable componentDir
 Remove-Variable profileDir
+Remove-Variable helperDir
+Remove-Variable scriptDir

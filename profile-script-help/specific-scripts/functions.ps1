@@ -40,7 +40,7 @@ function curlex($url) {
     $uri = new-object system.uri $url
     $filename = $name = $uri.segments | Select-Object -Last 1
     $path = join-path $env:Temp $filename
-    if( test-path $path ) { rm -force $path }
+    if ( test-path $path ) { rm -force $path }
 
     (new-object net.webclient).DownloadFile($url, $path)
 
@@ -50,12 +50,12 @@ function curlex($url) {
 # Empty the Recycle Bin on all drives
 function Empty-RecycleBin {
     $RecBin = (New-Object -ComObject Shell.Application).Namespace(0xA)
-    $RecBin.Items() | %{Remove-Item $_.Path -Recurse -Confirm:$false}
+    $RecBin.Items() | % { Remove-Item $_.Path -Recurse -Confirm:$false }
 }
 
 # Sound Volume
 function Get-SoundVolume {
-  <#
+    <#
   .SYNOPSIS
   Get audio output volume.
 
@@ -74,10 +74,10 @@ function Get-SoundVolume {
   .LINK
   https://github.com/jayharris/dotfiles-windows/
   #>
-  [math]::Round([Audio]::Volume * 100)
+    [math]::Round([Audio]::Volume * 100)
 }
-function Set-SoundVolume([Parameter(mandatory=$true)][Int32] $Volume) {
-  <#
+function Set-SoundVolume([Parameter(mandatory = $true)][Int32] $Volume) {
+    <#
   .SYNOPSIS
   Set audio output volume.
 
@@ -107,10 +107,10 @@ function Set-SoundVolume([Parameter(mandatory=$true)][Int32] $Volume) {
   .LINK
   https://github.com/jayharris/dotfiles-windows/
   #>
-  [Audio]::Volume = ($Volume / 100)
+    [Audio]::Volume = ($Volume / 100)
 }
 function Set-SoundMute {
-  <#
+    <#
   .SYNOPSIS
   Mote audio output.
 
@@ -129,10 +129,10 @@ function Set-SoundMute {
   .LINK
   https://github.com/jayharris/dotfiles-windows/
   #>
-   [Audio]::Mute = $true
+    [Audio]::Mute = $true
 }
 function Set-SoundUnmute {
-  <#
+    <#
   .SYNOPSIS
   Unmote audio output.
 
@@ -151,22 +151,22 @@ function Set-SoundUnmute {
   .LINK
   https://github.com/jayharris/dotfiles-windows/
   #>
-   [Audio]::Mute = $false
+    [Audio]::Mute = $false
 }
 
 
 ### File System functions
 ### ----------------------------
 # Create a new directory and enter it
-function CreateAndSet-Directory([String] $path) { New-Item $path -ItemType Directory -ErrorAction SilentlyContinue; Set-Location $path}
+function CreateAndSet-Directory([String] $path) { New-Item $path -ItemType Directory -ErrorAction SilentlyContinue; Set-Location $path }
 
 # Determine size of a file or total size of a directory
-function Get-DiskUsage([string] $path=(Get-Location).Path) {
+function Get-DiskUsage([string] $path = (Get-Location).Path) {
     Convert-ToDiskSize `
-        ( `
+    ( `
             Get-ChildItem .\ -recurse -ErrorAction SilentlyContinue `
-            | Measure-Object -property length -sum -ErrorAction SilentlyContinue
-        ).Sum `
+        | Measure-Object -property length -sum -ErrorAction SilentlyContinue
+    ).Sum `
         1
 }
 
@@ -181,18 +181,18 @@ function Clean-Disks {
 # Reload the $env object from the registry
 function Refresh-Environment {
     $locations = 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment',
-                 'HKCU:\Environment'
+    'HKCU:\Environment'
 
     $locations | ForEach-Object {
         $k = Get-Item $_
         $k.GetValueNames() | ForEach-Object {
-            $name  = $_
+            $name = $_
             $value = $k.GetValue($_)
             Set-Item -Path Env:\$name -Value $value
         }
     }
 
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 }
 
 # Set a permanent Environment variable, and reload it into $env
@@ -215,9 +215,9 @@ function Append-EnvPathIfExists([String]$path) { if (Test-Path $path) { Append-E
 
 # Convert a number to a disk size (12.4K or 5M)
 function Convert-ToDiskSize {
-    param ( $bytes, $precision='0' )
-    foreach ($size in ("B","K","M","G","T")) {
-        if (($bytes -lt 1000) -or ($size -eq "T")){
+    param ( $bytes, $precision = '0' )
+    foreach ($size in ("B", "K", "M", "G", "T")) {
+        if (($bytes -lt 1000) -or ($size -eq "T")) {
             $bytes = ($bytes).tostring("F0" + "$precision")
             return "${bytes}${size}"
         }
@@ -238,7 +238,8 @@ function Start-IISExpress {
         if ($iisExpress -eq $null) { $iisExpress = Get-Item "${env:ProgramFiles(x86)}\IIS Express\iisexpress.exe" }
 
         & $iisExpress @("/path:${path}") /port:$port
-    } else { Write-Warning "Unable to find iisexpress.exe"}
+    }
+    else { Write-Warning "Unable to find iisexpress.exe" }
 }
 
 # Extract a .zip file
@@ -282,7 +283,7 @@ function Unzip-File {
     #>
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [string]$File,
 
         [ValidateNotNullOrEmpty()]
@@ -293,21 +294,128 @@ function Unzip-File {
     $destinationPath = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($Destination)
 
     if (($PSVersionTable.PSVersion.Major -ge 3) -and
-       ((Get-ItemProperty -Path "HKLM:\Software\Microsoft\NET Framework Setup\NDP\v4\Full" -ErrorAction SilentlyContinue).Version -like "4.5*" -or
-       (Get-ItemProperty -Path "HKLM:\Software\Microsoft\NET Framework Setup\NDP\v4\Client" -ErrorAction SilentlyContinue).Version -like "4.5*")) {
+        ((Get-ItemProperty -Path "HKLM:\Software\Microsoft\NET Framework Setup\NDP\v4\Full" -ErrorAction SilentlyContinue).Version -like "4.5*" -or
+            (Get-ItemProperty -Path "HKLM:\Software\Microsoft\NET Framework Setup\NDP\v4\Client" -ErrorAction SilentlyContinue).Version -like "4.5*")) {
 
         try {
             [System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem") | Out-Null
             [System.IO.Compression.ZipFile]::ExtractToDirectory("$filePath", "$destinationPath")
-        } catch {
+        }
+        catch {
             Write-Warning -Message "Unexpected Error. Error details: $_.Exception.Message"
         }
-    } else {
+    }
+    else {
         try {
             $shell = New-Object -ComObject Shell.Application
             $shell.Namespace($destinationPath).copyhere(($shell.NameSpace($filePath)).items())
-        } catch {
+        }
+        catch {
             Write-Warning -Message "Unexpected Error. Error details: $_.Exception.Message"
         }
     }
 }
+
+
+
+function Takeown-Registry($key) {
+    # TODO does not work for all root keys yet
+    switch ($key.split('\')[0]) {
+        "HKEY_CLASSES_ROOT" {
+            $reg = [Microsoft.Win32.Registry]::ClassesRoot
+            $key = $key.substring(18)
+        }
+        "HKEY_CURRENT_USER" {
+            $reg = [Microsoft.Win32.Registry]::CurrentUser
+            $key = $key.substring(18)
+        }
+        "HKEY_LOCAL_MACHINE" {
+            $reg = [Microsoft.Win32.Registry]::LocalMachine
+            $key = $key.substring(19)
+        }
+    }
+  
+    # get administraor group
+    $admins = New-Object System.Security.Principal.SecurityIdentifier("S-1-5-32-544")
+    $admins = $admins.Translate([System.Security.Principal.NTAccount])
+  
+    # set owner
+    $key = $reg.OpenSubKey($key, "ReadWriteSubTree", "TakeOwnership")
+    $acl = $key.GetAccessControl()
+    $acl.SetOwner($admins)
+    $key.SetAccessControl($acl)
+  
+    # set FullControl
+    $acl = $key.GetAccessControl()
+    $rule = New-Object System.Security.AccessControl.RegistryAccessRule($admins, "FullControl", "Allow")
+    $acl.SetAccessRule($rule)
+    $key.SetAccessControl($acl)
+}
+  
+function Takeown-File($path) {
+    takeown.exe /A /F $path
+    $acl = Get-Acl $path
+  
+    # get administraor group
+    $admins = New-Object System.Security.Principal.SecurityIdentifier("S-1-5-32-544")
+    $admins = $admins.Translate([System.Security.Principal.NTAccount])
+  
+    # add NT Authority\SYSTEM
+    $rule = New-Object System.Security.AccessControl.FileSystemAccessRule($admins, "FullControl", "None", "None", "Allow")
+    $acl.AddAccessRule($rule)
+  
+    Set-Acl -Path $path -AclObject $acl
+}
+  
+function Takeown-Folder($path) {
+    Takeown-File $path
+    foreach ($item in Get-ChildItem $path) {
+        if (Test-Path $item -PathType Container) {
+            Takeown-Folder $item.FullName
+        }
+        else {
+            Takeown-File $item.FullName
+        }
+    }
+}
+
+function Elevate-Privileges {
+    param($Privilege)
+    $Definition = @"
+    using System;
+    using System.Runtime.InteropServices;
+    public class AdjPriv {
+        [DllImport("advapi32.dll", ExactSpelling = true, SetLastError = true)]
+            internal static extern bool AdjustTokenPrivileges(IntPtr htok, bool disall, ref TokPriv1Luid newst, int len, IntPtr prev, IntPtr rele);
+        [DllImport("advapi32.dll", ExactSpelling = true, SetLastError = true)]
+            internal static extern bool OpenProcessToken(IntPtr h, int acc, ref IntPtr phtok);
+        [DllImport("advapi32.dll", SetLastError = true)]
+            internal static extern bool LookupPrivilegeValue(string host, string name, ref long pluid);
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+            internal struct TokPriv1Luid {
+                public int Count;
+                public long Luid;
+                public int Attr;
+            }
+        internal const int SE_PRIVILEGE_ENABLED = 0x00000002;
+        internal const int TOKEN_QUERY = 0x00000008;
+        internal const int TOKEN_ADJUST_PRIVILEGES = 0x00000020;
+        public static bool EnablePrivilege(long processHandle, string privilege) {
+            bool retVal;
+            TokPriv1Luid tp;
+            IntPtr hproc = new IntPtr(processHandle);
+            IntPtr htok = IntPtr.Zero;
+            retVal = OpenProcessToken(hproc, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, ref htok);
+            tp.Count = 1;
+            tp.Luid = 0;
+            tp.Attr = SE_PRIVILEGE_ENABLED;
+            retVal = LookupPrivilegeValue(null, privilege, ref tp.Luid);
+            retVal = AdjustTokenPrivileges(htok, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
+            return retVal;
+        }
+    }
+"@
+    $ProcessHandle = (Get-Process -id $pid).Handle
+    $type = Add-Type $definition -PassThru
+    $type[0]::EnablePrivilege($processHandle, $Privilege)
+} 

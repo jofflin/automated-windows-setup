@@ -1,7 +1,7 @@
 # Profile for the Visual Studio Shell, only. (e.g. Package Manager Console)
 # ===========
 
-Push-Location (Split-Path -parent $profile)
+Push-Location (Join-Path (Split-Path -parent $profile) "profile-script-help")
 "components-nuget" | Where-Object {Test-Path "$_.ps1"} | ForEach-Object -process {Invoke-Expression ". .\$_.ps1"}
 Pop-Location
 
