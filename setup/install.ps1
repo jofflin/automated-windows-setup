@@ -1,5 +1,5 @@
 $account = "hoeffjo"
-$repo = "automated-windows-setupgit "
+$repo = "automated-windows-setup"
 $branch = "master"
 
 $dotfilesTempDir = Join-Path $env:TEMP "dotfiles"
