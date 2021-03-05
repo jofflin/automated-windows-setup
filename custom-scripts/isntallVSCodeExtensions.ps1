@@ -12,16 +12,22 @@
 # Get more Package Names from the Visual Studio Marketplace URL itemName parameter.
 #   Example: https://marketplace.visualstudio.com/items?itemName=TheDan.FindChangesetByComment
 
-$DownloadAndInstall = $PSScriptRoot + "\install-vsix.ps1"
+$DownloadAndInstall = $PSScriptRoot + "\helper\vsix-helper.ps1"
 
 # !& $DownloadAndInstall -PackageName "Name from Marketplace" query: itemName=XXX
-& $DownloadAndInstall -PackageName "SergeyVlasov.VisualCommander"
-& $DownloadAndInstall -PackageName "MBulli.SmartCommandlineArguments"
-& $DownloadAndInstall -PackageName "mayerwin.RenameVisualStudioWindowTitle"
-& $DownloadAndInstall -PackageName "VisualCppDevLabs.CQuickFixes2017"
-& $DownloadAndInstall -PackageName "TomasRestrepo.Viasfora"
-& $DownloadAndInstall -PackageName "MadsKristensen.MarkdownEditor"
-& $DownloadAndInstall -PackageName "PeterMacej.MultilineSearchandReplace"
-& $DownloadAndInstall -PackageName "GitHub.GitHubExtensionforVisualStudio"
-& $DownloadAndInstall -PackageName "TheDan.FindChangesetByComment"
-& $DownloadAndInstall -PackageName "caphyon.ClangPowerTools"
+& $DownloadAndInstall -PackageName "TabNine.tabnine-vscode"
+& $DownloadAndInstall -PackageName "WallabyJs.quokka-vscode"
+& $DownloadAndInstall -PackageName "Angular.ng-template"
+& $DownloadAndInstall -PackageName "esbenp.prettier-vscode"
+& $DownloadAndInstall -PackageName "eg2.vscode-npm-script"
+& $DownloadAndInstall -PackageName "eamodio.gitlens"
+& $DownloadAndInstall -PackageName "dsznajder.es7-react-js-snippets"
+& $DownloadAndInstall -PackageName "dbaeumer.vscode-eslint"
+& $DownloadAndInstall -PackageName "burkeholland.simple-react-snippets"
+& $DownloadAndInstall -PackageName "humao.rest-client"
+& $DownloadAndInstall -PackageName "ritwickdey.LiveServer"
+& $DownloadAndInstall -PackageName "pranaygp.vscode-css-peek"
+# & $DownloadAndInstall -PackageName ""
+
+# ? When using settings-sync
+# & $DownloadAndInstall -PackageName "Shan.code-settings-sync"
