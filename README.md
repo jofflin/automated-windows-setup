@@ -30,6 +30,7 @@ It copies all needed files into your Powershell directory `C:\Users\USER_XY\Docu
 |   +-- deps.ps1
 |   +-- windows.ps1
 |   +-- installwsl2.ps1
+|   +-- downloadGitRepos.ps1
 |   +-- LayoutModification.xml
 +-- home
 |   +-- .anyDotFiles
@@ -55,6 +56,7 @@ It copies all needed files into your Powershell directory `C:\Users\USER_XY\Docu
   - `windows.ps1` removes unwanted Software and configures Windows to your needs
   - `deps.ps1` installs all things that you need
   - `customStartLayout.ps1` sets the Taskbar and StartLayout to the settings in the `LayoutModification.xml` (assuming you installed most of the Software from the `deps.ps1`
+  - `downloadGitRepos.ps1` downloads all your repositories. You need to setup a User Token and allow full access to your repos (otherwise only public repos will be downloaded).
 
 ### Suggested steps
 
